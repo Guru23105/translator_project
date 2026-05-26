@@ -1,0 +1,184 @@
+:root {
+    --bg: #070914;
+    --card: rgba(15, 23, 42, 0.72);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text: #f8fafc;
+    --muted: #9ca3af;
+    --primary: #22c55e;
+    --primary-dark: #16a34a;
+    --accent: #60a5fa;
+    --danger: #f87171;
+    --field: rgba(255, 255, 255, 0.07);
+    --field-border: rgba(255, 255, 255, 0.14);
+    --shadow: 0 24px 80px rgba(0, 0, 0, 0.48);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 18% 20%, rgba(96, 165, 250, 0.28), transparent 30%),
+        radial-gradient(circle at 84% 18%, rgba(34, 197, 94, 0.22), transparent 28%),
+        linear-gradient(135deg, #070914 0%, #111827 48%, #07111f 100%);
+}
+
+.auth-shell {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 32px 16px;
+}
+
+.login-card {
+    width: min(100%, 430px);
+    padding: 34px;
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+}
+
+.brand-mark {
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 24px;
+    border-radius: 20px;
+    color: var(--text);
+    background: linear-gradient(135deg, rgba(96, 165, 250, 0.28), rgba(34, 197, 94, 0.24));
+    border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.login-heading {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    margin-bottom: 8px;
+    color: var(--primary);
+    font-size: 0.77rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    line-height: 1.05;
+    letter-spacing: 0;
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.55;
+}
+
+.login-form {
+    display: grid;
+    gap: 18px;
+}
+
+.field-group {
+    display: grid;
+    gap: 8px;
+}
+
+label {
+    color: #dbeafe;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border: 1px solid var(--field-border);
+    border-radius: 16px;
+    outline: none;
+    background: var(--field);
+    color: var(--text);
+    font: inherit;
+    transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+input::placeholder {
+    color: #64748b;
+}
+
+input:focus {
+    border-color: rgba(96, 165, 250, 0.72);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.14);
+}
+
+.auth-error {
+    min-height: 22px;
+    color: var(--danger);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.auth-error:empty {
+    display: none;
+}
+
+.login-button {
+    position: relative;
+    height: 54px;
+    border: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    color: #06110a;
+    background: linear-gradient(135deg, var(--primary), #86efac);
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 16px 36px rgba(34, 197, 94, 0.28);
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+
+.login-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-120%) skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+    transition: transform 650ms ease;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px rgba(34, 197, 94, 0.36);
+    filter: saturate(1.05);
+}
+
+.login-button:hover::before {
+    transform: translateX(120%) skewX(-18deg);
+}
+
+.login-button:disabled {
+    cursor: wait;
+    opacity: 0.72;
+    transform: none;
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 26px;
+        border-radius: 22px;
+    }
+}

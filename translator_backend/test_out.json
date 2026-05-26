@@ -1,0 +1,30 @@
+{
+  "tanglish": {
+    "original": "ennnnnaaaa bro",
+    "normalized": "ena brother",
+    "transliterated": "ஏந ப்ரோதேர்",
+    "translated_text": "Another brother",
+    "corrected_text": "Another brother"
+  },
+  "hinglish": {
+    "original": "kya kar rahe ho",
+    "normalized": "kya kar rahe ho",
+    "transliterated": "क्य कर् रहे हो",
+    "translated_text": "what are you doing",
+    "corrected_text": "what are you doing"
+  },
+  "manglish": {
+    "original": "evideya pokunne",
+    "normalized": "evide aa pokunne",
+    "transliterated": "ഏവിദേ ആ പോകുന്നേ",
+    "translated_text": "Where are you going?",
+    "corrected_text": "Where are you going?"
+  },
+  "eng_to_tam": {
+    "original": "Where are you going",
+    "normalized": "Where are you going",
+    "transliterated": "Where are you going",
+    "translated_text": "எங்கே போகிறாய்",
+    "corrected_text": "Where are you going"
+  }
+}

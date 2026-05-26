@@ -8,6 +8,7 @@ const supportedLanguages = [
     { code: "kn", label: "Kannada" },
     { code: "fr", label: "French" },
     { code: "es", label: "Spanish" },
+    { code: "ja", label: "Japanese" },
 ];
 
 const speechLanguageCodes = {
@@ -19,6 +20,7 @@ const speechLanguageCodes = {
     kn: "kn-IN",
     fr: "fr-FR",
     es: "es-ES",
+    ja: "ja-JP",
 };
 
 let availableVoices = [];

@@ -5,6 +5,7 @@ from rest_framework.response import Response
 
 from deep_translator import GoogleTranslator
 from textblob import TextBlob
+from .pipeline import process_translation_pipeline
 
 
 LANGUAGES = {
@@ -16,6 +17,7 @@ LANGUAGES = {
     "kn": "kannada",
     "fr": "french",
     "es": "spanish",
+    "ja": "japanese",
 }
 
 
@@ -47,35 +49,29 @@ def translate_text(request):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-    # 4. No external API call is needed when both languages are the same.
-    if source == target:
-        return Response(
-            {
-                "translated_text": text,
-                "corrected_text": text,
-            }
-        )
-
-    # 5. Correct spelling only for English input. Other languages are left as-is.
-    corrected_text = str(TextBlob(text).correct()) if source == "en" else text
-
+    # 4. Process text through the NLP pipeline
     try:
-        # 6. Ask deep_translator to translate the corrected text.
-        translated = GoogleTranslator(source=source, target=target).translate(
-            corrected_text
-        )
-    except Exception:
+        print(f"Translating from {source} to {target}")
+        result = process_translation_pipeline(text, source, target)
+        print(f"Pipeline result: {result}")
+        # Handle both old and new response structures
+        intermediate = result.get("transliterated", result.get("dictionary_translated", result.get("tanglish_translated", "")))
+        
+        return Response({
+            "translated_text": result["translated_text"],
+            "corrected_text": result["corrected_text"],
+            "intermediate_steps": {
+                "normalized": result["normalized"],
+                "transliterated": intermediate
+            }
+        })
+    except Exception as e:
+        # Log the actual error for debugging
+        print(f"Translation pipeline error: {type(e).__name__}: {e}")
         return Response(
-            {"error": "Translation service is unavailable. Please try again."},
-            status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            {"error": f"Translation failed: {str(e)}"},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR,
         )
-
-    return Response(
-        {
-            "translated_text": translated,
-            "corrected_text": corrected_text,
-        }
-    )
 
 
 @api_view(["POST"])
